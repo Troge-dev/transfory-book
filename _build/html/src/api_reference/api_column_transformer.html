@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>ColumnTransformer API Reference &#8212; Transfory Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_reference/api_column_transformer';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DatetimeFeatureExtractor API Reference" href="api_datetime.html" />
+    <link rel="prev" title="BaseTransformer API Reference" href="api_base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Transfory Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the Transfory Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_base.html">BaseTransformer API Reference</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ColumnTransformer API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_datetime.html">DatetimeFeatureExtractor API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_encoder.html">Encoder API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_featuregen.html">FeatureGenerator API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_insight.html">InsightReporter API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_missing.html">MissingValueHandler API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_outlier.html">OutlierHandler API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_pipeline.html">Pipeline API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_scaler.html">Scaler API Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/src/api_reference/api_column_transformer.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ColumnTransformer API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor">Constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-argument-format">Transformers Argument Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer"><code class="docutils literal notranslate"><span class="pre">transformer</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#columns"><code class="docutils literal notranslate"><span class="pre">columns</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitted-parameters">Fitted Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-public-methods">Core Public Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform"><code class="docutils literal notranslate"><span class="pre">transform</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-transform"><code class="docutils literal notranslate"><span class="pre">fit_transform</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-helper-methods">Internal Helper Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-columns-by-selector"><code class="docutils literal notranslate"><span class="pre">_get_columns_by_selector</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-subclass-hooks-from-basetransformer">Required Subclass Hooks (from BaseTransformer)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">_fit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">_transform</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-behavior">Logging Behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dunder-utility-methods">Dunder &amp; Utility Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage">Example Usage</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="columntransformer-api-reference">
+<h1>ColumnTransformer API Reference<a class="headerlink" href="#columntransformer-api-reference" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> is a composite transformer that applies <strong>different transformers to different columns</strong> of a pandas DataFrame. It enables:</p>
+<ul class="simple">
+<li><p>Parallel column-wise transformations</p></li>
+<li><p>Mixing transformed and passthrough columns</p></li>
+<li><p>Automatic numeric and categorical column selection</p></li>
+<li><p>Callable-based column selection</p></li>
+<li><p>Remainder column handling (<code class="docutils literal notranslate"><span class="pre">drop</span></code> or <code class="docutils literal notranslate"><span class="pre">passthrough</span></code>)</p></li>
+<li><p>Integrated structured logging via <code class="docutils literal notranslate"><span class="pre">BaseTransformer</span></code></p></li>
+</ul>
+<p>It is inspired by scikit-learn’s <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code>, but designed to work natively with <strong>Transfory transformers</strong>.</p>
+</section>
+<section id="constructor">
+<h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">BaseTransformer</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]],</span>
+    <span class="n">remainder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;drop&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">logging_callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">st</span><span class="p">]()]()]()</span><span class="n">_</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transformers</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">List[Tuple[str,</span> <span class="pre">BaseTransformer</span> <span class="pre">or</span> <span class="pre">str,</span> <span class="pre">Union[str,</span> <span class="pre">List[str],</span> <span class="pre">Callable]]]</span></code></p></td>
+<td><p>List of <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">transformer,</span> <span class="pre">columns)</span></code> tuples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">remainder</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{'drop',</span> <span class="pre">'passthrough'}</span></code></p></td>
+<td><p>How to handle columns not assigned to any transformer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Optional[str]</span></code></p></td>
+<td><p>Human-readable name of the transformer. Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;ColumnTransformer&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logging_callback</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Optional[Callable]</span></code></p></td>
+<td><p>Optional structured logging callback.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="transformers-argument-format">
+<h2>Transformers Argument Format<a class="headerlink" href="#transformers-argument-format" title="Permalink to this heading">#</a></h2>
+<p>Each transformer tuple must follow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">transformer</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="name">
+<h3><code class="docutils literal notranslate"><span class="pre">name</span></code><a class="headerlink" href="#name" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p>Unique identifier for the sub-transformer</p></li>
+</ul>
+</section>
+<section id="transformer">
+<h3><code class="docutils literal notranslate"><span class="pre">transformer</span></code><a class="headerlink" href="#transformer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseTransformer</span></code> instance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;passthrough&quot;</span></code> to include columns unchanged.</p></li>
+</ul>
+</section>
+<section id="columns">
+<h3><code class="docutils literal notranslate"><span class="pre">columns</span></code><a class="headerlink" href="#columns" title="Permalink to this heading">#</a></h3>
+<p>Can be one of:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">List[str]</span></code></p></td>
+<td><p>Selects explicit column names</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;numeric&quot;</span></code></p></td>
+<td><p>Selects all numeric columns</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;categorical&quot;</span></code></p></td>
+<td><p>Selects all object &amp; category columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Callable</span></code></p></td>
+<td><p>Function that receives <code class="docutils literal notranslate"><span class="pre">X.columns</span></code> and returns a list</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">is_fitted</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if transformer has been fitted</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fitted_params</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code></p></td>
+<td><p>Stores learned transformation metadata</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fitted-parameters">
+<h2>Fitted Parameters<a class="headerlink" href="#fitted-parameters" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">processed_transformers</span></code></p></td>
+<td><p>List of <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">fitted_transformer,</span> <span class="pre">actual_columns)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">passthrough_columns</span></code></p></td>
+<td><p>Explicitly passed-through columns</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">remainder_columns</span></code></p></td>
+<td><p>Columns not selected by any transformer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="core-public-methods">
+<h2>Core Public Methods<a class="headerlink" href="#core-public-methods" title="Permalink to this heading">#</a></h2>
+<section id="fit">
+<h3><code class="docutils literal notranslate"><span class="pre">fit</span></code><a class="headerlink" href="#fit" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColumnTransformer</span>
+</pre></div>
+</div>
+<p>Fits all sub-transformers on their respective column subsets.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Resolves column selectors</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deep-copies transformers for isolation</p></td>
+</tr>
+<tr class="row-even"><td><p>Fits each transformer independently</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stores fitted transformer metadata</p></td>
+</tr>
+<tr class="row-even"><td><p>Tracks passthrough and remainder columns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Logs all sub-transformer operations</p></td>
+</tr>
+<tr class="row-even"><td><p>Raises <code class="docutils literal notranslate"><span class="pre">FrozenTransformerError</span></code> if frozen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="transform">
+<h3><code class="docutils literal notranslate"><span class="pre">transform</span></code><a class="headerlink" href="#transform" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+</pre></div>
+</div>
+<p>Applies all fitted transformers and concatenates results.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Requires prior fitting</p></td>
+</tr>
+<tr class="row-odd"><td><p>Applies each transformer to its columns</p></td>
+</tr>
+<tr class="row-even"><td><p>Adds passthrough columns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adds remainder columns if enabled</p></td>
+</tr>
+<tr class="row-even"><td><p>Preserves row index</p></td>
+</tr>
+<tr class="row-odd"><td><p>Concatenates all outputs column-wise</p></td>
+</tr>
+<tr class="row-even"><td><p>Raises NotFittedError if called before fitting</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fit-transform">
+<h3><code class="docutils literal notranslate"><span class="pre">fit_transform</span></code><a class="headerlink" href="#fit-transform" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+</pre></div>
+</div>
+<p>Runs <code class="docutils literal notranslate"><span class="pre">fit()</span></code> followed by <code class="docutils literal notranslate"><span class="pre">transform()</span></code>.</p>
+</section>
+</section>
+<section id="internal-helper-methods">
+<h2>Internal Helper Methods<a class="headerlink" href="#internal-helper-methods" title="Permalink to this heading">#</a></h2>
+<section id="get-columns-by-selector">
+<h3><code class="docutils literal notranslate"><span class="pre">_get_columns_by_selector</span></code><a class="headerlink" href="#get-columns-by-selector" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_get_columns_by_selector</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Resolves column selectors into actual column names.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Selector Type</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>Filters valid column names</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;numeric&quot;</span></code></p></td>
+<td><p>Selects numeric columns</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;categorical&quot;</span></code></p></td>
+<td><p>Selects object &amp; category columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">callable</span></code></p></td>
+<td><p>Must return a list of column names</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="required-subclass-hooks-from-basetransformer">
+<h2>Required Subclass Hooks (from BaseTransformer)<a class="headerlink" href="#required-subclass-hooks-from-basetransformer" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">_fit</span></code><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_fit</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Responsibility</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fits each sub-transformer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tracks selected columns</p></td>
+</tr>
+<tr class="row-even"><td><p>Stores processed transformers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id2">
+<h3><code class="docutils literal notranslate"><span class="pre">_transform</span></code><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_transform</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Responsibility</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Applies each fitted transformer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Appends passthrough columns</p></td>
+</tr>
+<tr class="row-even"><td><p>Appends remainder columns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Returns final concatenated DataFrame</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="logging-behavior">
+<h2>Logging Behavior<a class="headerlink" href="#logging-behavior" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> automatically logs:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Event</p></th>
+<th class="head"><p>Trigger</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fit_sub_transformer_start</span></code></p></td>
+<td><p>Before fitting each transformer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fit_sub_transformer_end</span></code></p></td>
+<td><p>After fitting each transformer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transform_sub_transformer_start</span></code></p></td>
+<td><p>Before transforming</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transform_sub_transformer_end</span></code></p></td>
+<td><p>After transforming</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transform_passthrough</span></code></p></td>
+<td><p>When explicit passthrough runs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transform_remainder</span></code></p></td>
+<td><p>When remainder passthrough runs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All sub-transformer logs are namespaced as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;group_name&gt;::&lt;step_name&gt;
+</pre></div>
+</div>
+</section>
+<section id="dunder-utility-methods">
+<h2>Dunder &amp; Utility Methods<a class="headerlink" href="#dunder-utility-methods" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">__repr__</span></code></p></td>
+<td><p>Shows transformer count and fit status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Example output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;ColumnTransformer (3 transformers) status=fitted&gt;
+</pre></div>
+</div>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Exception</p></th>
+<th class="head"><p>When Raised</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NotFittedError</span></code></p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">transform()</span></code> is called before fitting</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></p></td>
+<td><p>Invalid transformer format or selectors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TypeError</span></code></p></td>
+<td><p>Invalid selector type</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="n">scaler</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">encoder</span><span class="p">,</span> <span class="s2">&quot;categorical&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;passthrough&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">])</span>
+    <span class="p">],</span>
+    <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;drop&quot;</span>
+<span class="p">)</span>
+
+<span class="n">X_out</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src\api_reference"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api_base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BaseTransformer API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api_datetime.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DatetimeFeatureExtractor API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor">Constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-argument-format">Transformers Argument Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer"><code class="docutils literal notranslate"><span class="pre">transformer</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#columns"><code class="docutils literal notranslate"><span class="pre">columns</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitted-parameters">Fitted Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-public-methods">Core Public Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform"><code class="docutils literal notranslate"><span class="pre">transform</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-transform"><code class="docutils literal notranslate"><span class="pre">fit_transform</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-helper-methods">Internal Helper Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-columns-by-selector"><code class="docutils literal notranslate"><span class="pre">_get_columns_by_selector</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-subclass-hooks-from-basetransformer">Required Subclass Hooks (from BaseTransformer)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">_fit</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">_transform</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-behavior">Logging Behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dunder-utility-methods">Dunder &amp; Utility Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage">Example Usage</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eleah Cabili
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

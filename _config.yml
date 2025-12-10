@@ -1,0 +1,12 @@
+# _config.yml
+title: "Transfory Book"
+author: "Eleah Cabili"
+
+execute:
+  execute_notebooks: "off"
+
+html:
+  favicon: ""
+  use_repository_button: false
+  use_issues_button: false
+  use_edit_page_button: false

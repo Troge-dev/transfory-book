@@ -1,0 +1,15 @@
+format: jb-book
+root: src/intro
+
+chapters:
+  - file: src/api_reference/api_base
+  - file: src/api_reference/api_column_transformer
+  - file: src/api_reference/api_datetime
+  - file: src/api_reference/api_encoder
+  - file: src/api_reference/api_featuregen
+  - file: src/api_reference/api_imputation
+  - file: src/api_reference/api_insight
+  - file: src/api_reference/api_missing
+  - file: src/api_reference/api_outlier
+  - file: src/api_reference/api_pipeline
+  - file: src/api_reference/api_scaler
